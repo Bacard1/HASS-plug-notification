@@ -1,30 +1,30 @@
-# 📣 HASS PLUG NOTIFICATION  
-[![PayPal дарение](https://img.shields.io/badge/PayPal-Дари-синьо?logo=paypal)](https://www.paypal.com/donate/?hosted_button_id=AAWFZVF2XCP5A)  ![Скрипт](https://img.shields.io/badge/logo-yaml-green?logo=yaml)  [![Български](https://img.shields.io/badge/Български-език-green?logo=translate&labelColor=gray&style=flat-square&link=https://example.com/bg)](BG.md)  
+# 📣 HASS PLUG NOTIFICATION
+[![PayPal Donate](https://img.shields.io/badge/PayPal-Donate-blue?logo=paypal)](https://www.paypal.com/donate/?hosted_button_id=AAWFZVF2XCP5A)  ![Script](https://img.shields.io/badge/logo-yaml-green?logo=yaml)  [![БългарскиЕзик](https://img.shields.io/badge/Български-Език-green?logo=translate&labelColor=gray&style=flat-square&link=https://example.com/bg)](BG.md)  
 
-Смарт контактите с функция за мониторинг дават възможност за следене на консумацията. Данните от мониторинга, използвани в автоматизация, могат да бъдат мощен инструмент за уведомяване при приключване на процес от ваш електроуред. В този случай ще ви покажа как смарт контакт ме уведомява за приключването на пералнята.
+Smart plugs with monitoring capabilities allow you to track energy consumption. The monitoring data used in an automation can be a powerful tool for notifying you when a process from your appliance has finished. In this case, I’ll show how a smart plug notifies me when the washing machine has completed its cycle.
 
-## 📦 СЪДЪРЖАНИЕ
+## 📦 CONTENTS
 
 - [📣 HASS PLUG NOTIFICATION](#-hass-plug-notification)
-	- [📦 СЪДЪРЖАНИЕ](#-съдържание)
+	- [📦 CONTENTS](#-contents)
 	- [🚀 Tuya Smart Plug Zigbee TS011F](#-tuya-smart-plug-zigbee-ts011f)
-	- [🛠️ АВТОМАТИЗАЦИЯ](#️-автоматизация)
-		- [🔌 СТАРТ](#-старт)
-		- [⏲️ УСЛОВИЕ](#️-условие)
-		- [📲 ДЕЙСТВИЕ](#-действие)
-		- [📳 КРАЙ](#-край)
-	- [🧾 ЦЯЛАТА АВТОМАТИЗАЦИЯ](#-цялата-автоматизация)
+	- [🛠️ AUTOMATION](#️-automation)
+		- [🔌 START](#-start)
+		- [⏲️ CONDITION](#️-condition)
+		- [📲 ACTION](#-action)
+		- [📳 END](#-end)
+	- [🧾 FULL AUTOMATION](#-full-automation)
 
 ## 🚀 Tuya Smart Plug Zigbee TS011F
 
-| ![plug](/img/tuya_smart_plug.png) | [Tuya Smart Plug Zigbee TS011F][plug] е смарт контакт на сравнително добра цена и със задоволителна реакция при обновяване на данните от мониторинга. На прост език – обновяването става сравнително бързо (около 10 сек.). Това не е идеално, но е напълно достатъчно – получавате известието си около 10 секунди след приключване на прането. |
+| ![plug](/img/tuya_smart_plug.png) | [Tuya Smart Plug Zigbee TS011F][plug] is a smart plug at a relatively good price with decent update speed for power monitoring data. Simply put – the updates occur fairly quickly (around 10 seconds). That’s not ideal, but it’s more than acceptable for our purpose: receiving a notification roughly 10 seconds after the washing machine finishes. |
 |----|----|
 
-## 🛠️ АВТОМАТИЗАЦИЯ  
-*Цел: В автоматизацията ще "запечатаме" времето от началото до края на процеса, за да избегнем фалшиви известия.*
+## 🛠️ AUTOMATION  
+*Goal: Capture the time from the start to the end of the washing process to avoid false notifications.*
 
-### 🔌 СТАРТ  
-Когато пералнята е в покой и изключена, [Tuya Smart Plug Zigbee TS011F][plug] показва стойност "0 watt", което означава, че всичко над "1 watt" ще показва, че пералнята е включена. Именно това условие ще активира нашата автоматизация:
+### 🔌 START  
+When the washing machine is idle and turned off, [Tuya Smart Plug Zigbee TS011F][plug] shows "0 watt". Anything above "1 watt" means the washing machine is running. That’s the trigger we’ll use for the automation:
 
 ```yaml
 alias: HASS PLUG NOTIFICATION
@@ -40,11 +40,11 @@ triggers:
 	  seconds: 10
 ```
 
-### ⏲️ УСЛОВИЕ
+### ⏲️ CONDITION
 
-⚠️ В тази автоматизация **няма** да използваме отделно `conditions`, защото ще поставим условие директно в действията.
+⚠️ This automation does **not** use a separate `conditions` block, because we apply conditions directly within the actions.
 
-### 📲 ДЕЙСТВИЕ  
+### 📲 ACTION  
 
 ```yaml
 actions:
@@ -61,7 +61,7 @@ actions:
   - service: notify.mitv
 	metadata: {}
 	data:
-	  message: Пералнята приключи !!!
+	  message: Washing machine finished !!!
 	  title: "Home Assistant Service:"
 	  data:
 		position: top-left
@@ -72,17 +72,17 @@ actions:
 		duration: 10
 ```
 
-Съобщението се изпраща до Android TV с помощта на [Notifications for Android TV](https://www.home-assistant.io/integrations/nfandroidtv/).  
+The message is sent to Android TV using [Notifications for Android TV](https://www.home-assistant.io/integrations/nfandroidtv/).  
 
 [![ADD Integrations](/img/button%20ADD%20INTEGRATION%20TO.svg)](https://my.home-assistant.io/redirect/config_flow_start?domain=nfandroidtv)
 
 ![notifications](/img/notifications.png)
 
-### 📳 КРАЙ  
+### 📳 END  
 
-Автоматизацията следи мощността на контакта, който захранва пералнята. Ако надвиши 1W – пералнята е включена. Когато падне под 1W за поне 5 секунди – приключила е. В този момент се изпраща уведомление.
+The automation monitors the power of the socket powering the washing machine. If power goes above 1W – it means the machine is running. If it drops below 1W for 5 seconds – it’s finished. A notification is then sent.
 
-## 🧾 ЦЯЛАТА АВТОМАТИЗАЦИЯ
+## 🧾 FULL AUTOMATION
 
 ```yaml
 alias: HASS PLUG NOTIFICATION
@@ -111,7 +111,7 @@ actions:
   - service: notify.mitv
 	metadata: {}
 	data:
-	  message: Пералнята приключи !!!
+	  message: Washing machine finished !!!
 	  title: "Home Assistant Service:"
 	  data:
 		position: top-left
@@ -122,10 +122,12 @@ actions:
 		duration: 10
 mode: single
 ```
+
 ---
 ---
 > [!TIP]
-> Ако този проект ви е харесъл, [ТУК](https://github.com/Bacard1?tab=repositories) ще намерите още интересни гранилища направени от мен.<br>
-> Ако срещате затруднения или имате въпроси не се колебайте да се свържете с мен.
+> If you like this project, check out [more of my repositories here](https://github.com/Bacard1?tab=repositories) .<br>
+> If you need help or have questions, feel free to contact me.
+
 
 [plug]: https://de.aliexpress.com/item/1005007060134011.html
