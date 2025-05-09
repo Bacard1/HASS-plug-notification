@@ -32,14 +32,14 @@
 alias: HASS PLUG NOTIFICATION
 description: ""
 triggers:
-  - platform: numeric_state
-	entity_id:
-	  - sensor.steckdose_002_wohnwand_power
-	above: 1
-	for:
-	  hours: 0
-	  minutes: 0
-	  seconds: 10
+ - platform: numeric_state
+ entity_id:
+  - sensor.steckdose_002_wohnwand_power
+ above: 1
+ for:
+  hours: 0
+  minutes: 0
+  seconds: 10
 ```
 
 ### ⏲️ УСЛОВИЕ
@@ -51,27 +51,27 @@ triggers:
 ```yaml
 actions:
   - wait_for_trigger:
-	  - platform: numeric_state
-		entity_id:
-		  - sensor.steckdose_002_wohnwand_power
-		below: 1
-		for:
-		  hours: 0
-		  minutes: 0
-		  seconds: 5
-	continue_on_timeout: false
-  - service: notify.mitv
-	metadata: {}
-	data:
-	  message: Пералнята приключи !!!
-	  title: "Home Assistant Service:"
-	  data:
-		position: top-left
-		transparency: 50%
-		color: black
-		interrupt: 0
-		fontsize: medium
-		duration: 10
+   - platform: numeric_state
+     entity_id:
+       - sensor.steckdose_002_wohnwand_power
+     below: 1
+     for:
+       hours: 0
+       minutes: 0
+       seconds: 5
+       continue_on_timeout: false
+   - service: notify.mitv
+     metadata: {}
+     data:
+      message: Washing machine finished !!!
+      title: "Home Assistant Service:"
+      data:
+       position: top-left
+       transparency: 50%
+       color: black
+       interrupt: 0
+       fontsize: medium
+       duration: 10
 ```
 
 Съобщението се изпраща до Android TV с помощта на [Notifications for Android TV](https://www.home-assistant.io/integrations/nfandroidtv/).  
@@ -91,37 +91,37 @@ alias: HASS PLUG NOTIFICATION
 description: ""
 triggers:
   - platform: numeric_state
-	entity_id:
-	  - sensor.steckdose_002_wohnwand_power
-	above: 1
-	for:
-	  hours: 0
-	  minutes: 0
-	  seconds: 10
+    entity_id:
+     - sensor.steckdose_002_wohnwand_power
+    above: 1
+    for:
+     hours: 0
+     minutes: 0
+     seconds: 10
 conditions: []
 actions:
   - wait_for_trigger:
-	  - platform: numeric_state
-		entity_id:
-		  - sensor.steckdose_002_wohnwand_power
-		below: 1
-		for:
-		  hours: 0
-		  minutes: 0
-		  seconds: 5
-	continue_on_timeout: false
+   - platform: numeric_state
+  entity_id:
+    - sensor.steckdose_002_wohnwand_power
+  below: 1
+  for:
+    hours: 0
+    minutes: 0
+    seconds: 5
+ continue_on_timeout: false
   - service: notify.mitv
-	metadata: {}
-	data:
-	  message: Пералнята приключи !!!
-	  title: "Home Assistant Service:"
-	  data:
-		position: top-left
-		transparency: 50%
-		color: black
-		interrupt: 0
-		fontsize: medium
-		duration: 10
+ metadata: {}
+ data:
+   message: Washing machine finished !!!
+   title: "Home Assistant Service:"
+   data:
+  position: top-left
+  transparency: 50%
+  color: black
+  interrupt: 0
+  fontsize: medium
+  duration: 10
 mode: single
 ```
 
