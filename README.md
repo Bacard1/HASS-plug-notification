@@ -1,3 +1,5 @@
+![BANNER](/img/banner.png)
+
 # 📣 HASS PLUG NOTIFICATION
 [![PayPal Donate](https://img.shields.io/badge/PayPal-Donate-blue?logo=paypal)](https://www.paypal.com/donate/?hosted_button_id=AAWFZVF2XCP5A)  ![Script](https://img.shields.io/badge/logo-yaml-green?logo=yaml)  [![БългарскиЕзик](https://img.shields.io/badge/Български-Език-green?logo=translate&labelColor=gray&style=flat-square&link=https://example.com/bg)](BG.md)  
 
