@@ -1,11 +1,11 @@
-# 📣 HASS PLUG NOTIFICATION  
-[![PayPal дарение](https://img.shields.io/badge/PayPal-Дари-синьо?logo=paypal)](https://www.paypal.com/donate/?hosted_button_id=AAWFZVF2XCP5A)  ![Скрипт](https://img.shields.io/badge/logo-yaml-green?logo=yaml)  [![Български](https://img.shields.io/badge/Български-език-green?logo=translate&labelColor=gray&style=flat-square&link=https://example.com/bg)](BG.md)  
+# 📣 ИЗВЕСТИЯ СЪС СМАРТ КОНТАКТ
+[![PayPal дарение](https://img.shields.io/badge/PayPal-Дари-синьо?logo=paypal)](https://www.paypal.com/donate/?hosted_button_id=AAWFZVF2XCP5A)  ![Скрипт](https://img.shields.io/badge/logo-yaml-green?logo=yaml)  [![ENGLISH](https://img.shields.io/badge/ENGLISH-language-green?logo=translate&labelColor=gray&style=flat-square&link=https://example.com/bg)](README.md)  
 
 Смарт контактите с функция за мониторинг дават възможност за следене на консумацията. Данните от мониторинга, използвани в автоматизация, могат да бъдат мощен инструмент за уведомяване при приключване на процес от ваш електроуред. В този случай ще ви покажа как смарт контакт ме уведомява за приключването на пералнята.
 
 ## 📦 СЪДЪРЖАНИЕ
 
-- [📣 HASS PLUG NOTIFICATION](#-hass-plug-notification)
+- [📣 ИЗВЕСТИЯ СЪС СМАРТ КОНТАКТ](#-известия-със-смарт-контакт)
 	- [📦 СЪДЪРЖАНИЕ](#-съдържание)
 	- [🚀 Tuya Smart Plug Zigbee TS011F](#-tuya-smart-plug-zigbee-ts011f)
 	- [🛠️ АВТОМАТИЗАЦИЯ](#️-автоматизация)
@@ -122,6 +122,7 @@ actions:
 		duration: 10
 mode: single
 ```
+
 ---
 ---
 > [!TIP]
