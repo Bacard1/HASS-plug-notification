@@ -3,19 +3,21 @@
 # 📣 HASS PLUG NOTIFICATION
 [![PayPal Donate](https://img.shields.io/badge/PayPal-Donate-blue?logo=paypal)](https://www.paypal.com/donate/?hosted_button_id=AAWFZVF2XCP5A)  ![Script](https://img.shields.io/badge/logo-yaml-green?logo=yaml)  [![БългарскиЕзик](https://img.shields.io/badge/Български-Език-green?logo=translate&labelColor=gray&style=flat-square&link=https://example.com/bg)](BG.md)  
 
-Smart plugs with monitoring capabilities allow you to track energy consumption. The monitoring data used in an automation can be a powerful tool for notifying you when a process from your appliance has finished. In this case, I’ll show how a smart plug notifies me when the washing machine has completed its cycle.
+This Home Assistant automation notifies you when a device plugged into a smart socket (e.g. washing machine, coffee maker, etc.) finishes its cycle. It uses real-time power monitoring to detect when the device has stopped consuming energy and sends a visual notification to your TV or Android device. Ideal for energy saving and convenience in daily life.
+
+🔧 Built with YAML · 📡 MQTT-compatible · 💡 Energy-efficient · 📺 Supports Android TV & Mi TV
 
 ## 📦 CONTENTS
 
 - [📣 HASS PLUG NOTIFICATION](#-hass-plug-notification)
-	- [📦 CONTENTS](#-contents)
-	- [🚀 Tuya Smart Plug Zigbee TS011F](#-tuya-smart-plug-zigbee-ts011f)
-	- [🛠️ AUTOMATION](#️-automation)
-		- [🔌 START](#-start)
-		- [⏲️ CONDITION](#️-condition)
-		- [📲 ACTION](#-action)
-		- [📳 END](#-end)
-	- [🧾 FULL AUTOMATION](#-full-automation)
+  - [📦 CONTENTS](#-contents)
+  - [🚀 Tuya Smart Plug Zigbee TS011F](#-tuya-smart-plug-zigbee-ts011f)
+  - [🛠️ AUTOMATION](#️-automation)
+    - [🔌 START](#-start)
+    - [⏲️ CONDITION](#️-condition)
+    - [📲 ACTION](#-action)
+    - [📳 END](#-end)
+  - [🧾 FULL AUTOMATION](#-full-automation)
 
 ## 🚀 Tuya Smart Plug Zigbee TS011F
 
@@ -66,12 +68,12 @@ actions:
       message: Washing machine finished !!!
       title: "Home Assistant Service:"
       data:
-     position: top-left
-     transparency: 50%
-     color: black
-     interrupt: 0
-     fontsize: medium
-     duration: 10
+       position: top-left
+       transparency: 50%
+       color: black
+       interrupt: 0
+       fontsize: medium
+       duration: 10
 ```
 
 The message is sent to Android TV using [Notifications for Android TV](https://www.home-assistant.io/integrations/nfandroidtv/).  
