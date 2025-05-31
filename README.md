@@ -1,92 +1,49 @@
-![BANNER](/img/banner.png)
+# 📣 SMART PLUG NOTIFICATIONS  
 
-# 📣 HASS PLUG NOTIFICATION
-[![PayPal Donate](https://img.shields.io/badge/PayPal-Donate-blue?logo=paypal)](https://www.paypal.com/donate/?hosted_button_id=AAWFZVF2XCP5A)  ![Script](https://img.shields.io/badge/logo-yaml-green?logo=yaml)  [![БългарскиЕзик](https://img.shields.io/badge/Български-Език-green?logo=translate&labelColor=gray&style=flat-square&link=https://example.com/bg)](BG.md)  
+![BANNER](/img/banner.png)  
 
-This Home Assistant automation notifies you when a device plugged into a smart socket (e.g. washing machine, coffee maker, etc.) finishes its cycle. It uses real-time power monitoring to detect when the device has stopped consuming energy and sends a visual notification to your TV or Android device. Ideal for energy saving and convenience in daily life.
+[![PayPal Donation](https://img.shields.io/badge/PayPal-Donate-blue?logo=paypal)](https://www.paypal.com/donate/?hosted_button_id=AAWFZVF2XCP5A)  
+![Script](https://img.shields.io/badge/logo-yaml-green?logo=yaml)  
+[![BULGARIAN](https://img.shields.io/badge/BULGARIAN-language-green?logo=translate&labelColor=gray&style=flat-square&link=https://example.com/en)](BG.md)  
 
-🔧 Built with YAML · 📡 MQTT-compatible · 💡 Energy-efficient · 📺 Supports Android TV & Mi TV
+This Home Assistant automation notifies you when a device connected to a smart plug (e.g., washing machine, coffee maker, etc.) finishes its cycle. It monitors real-time power consumption to detect when the device stops operating and sends a visual notification to your TV or Android device. Ideal for energy savings and daily convenience.  
 
-## 📦 CONTENTS
+🔧 Built with YAML  
+📡 MQTT Compatible  
+💡 Energy Efficient  
+📺 Supports Android TV & Mi TV  
 
-- [📣 HASS PLUG NOTIFICATION](#-hass-plug-notification)
+---
+
+## 📦 CONTENTS  
+
+- [� SMART PLUG NOTIFICATIONS](#-smart-plug-notifications)
   - [📦 CONTENTS](#-contents)
   - [🚀 Tuya Smart Plug Zigbee TS011F](#-tuya-smart-plug-zigbee-ts011f)
-  - [🛠️ AUTOMATION](#️-automation)
-    - [🔌 START](#-start)
-    - [⏲️ CONDITION](#️-condition)
-    - [📲 ACTION](#-action)
-    - [📳 END](#-end)
-  - [🧾 FULL AUTOMATION](#-full-automation)
+  - [METHOD 1: Notification Automation](#method-1-notification-automation)
+    - [🔌 Automation Trigger](#-automation-trigger)
+    - [⏲️ Condition](#️-condition)
+    - [📲 Action](#-action)
+    - [📳 Automation Outcome](#-automation-outcome)
+    - [🧾 Full Automation Code](#-full-automation-code)
+  - [METHOD 2: Using a Binary Sensor](#method-2-using-a-binary-sensor)
+    - [Creating a Binary Sensor](#creating-a-binary-sensor)
+    - [Sensor Configuration](#sensor-configuration)
+  - [💡 Tips \& Additional Info](#-tips--additional-info)
 
-## 🚀 Tuya Smart Plug Zigbee TS011F
+---
 
-| ![plug](/img/tuya_smart_plug.png) | [Tuya Smart Plug Zigbee TS011F][plug] is a smart plug at a relatively good price with decent update speed for power monitoring data. Simply put – the updates occur fairly quickly (around 10 seconds). That’s not ideal, but it’s more than acceptable for our purpose: receiving a notification roughly 10 seconds after the washing machine finishes. |
-|----|----|
+## 🚀 Tuya Smart Plug Zigbee TS011F  
 
-## 🛠️ AUTOMATION  
-*Goal: Capture the time from the start to the end of the washing process to avoid false notifications.*
+| ![plug](/img/tuya_smart_plug.png) | The [Tuya Smart Plug Zigbee TS011F][plug] is an affordable smart plug with decent real-time monitoring responsiveness. In simple terms, data updates are relatively fast (around 10 seconds). While not perfect, it's sufficient—you'll receive the notification about 10 seconds after your laundry finishes. |  
+|----|----|  
 
-### 🔌 START  
-When the washing machine is idle and turned off, [Tuya Smart Plug Zigbee TS011F][plug] shows "0 watt". Anything above "1 watt" means the washing machine is running. That’s the trigger we’ll use for the automation:
+---
 
-```yaml
-alias: HASS PLUG NOTIFICATION
-description: ""
-triggers:
- - platform: numeric_state
- entity_id:
-  - sensor.steckdose_002_wohnwand_power
- above: 1
- for:
-  hours: 0
-  minutes: 0
-  seconds: 10
-```
+## METHOD 1: Notification Automation  
 
-### ⏲️ CONDITION
-
-⚠️ This automation does **not** use a separate `conditions` block, because we apply conditions directly within the actions.
-
-### 📲 ACTION  
-
-```yaml
-actions:
-  - wait_for_trigger:
-   - platform: numeric_state
-     entity_id:
-       - sensor.steckdose_002_wohnwand_power
-     below: 1
-     for:
-       hours: 0
-       minutes: 0
-       seconds: 5
-       continue_on_timeout: false
-   - service: notify.mitv
-     metadata: {}
-     data:
-      message: Washing machine finished !!!
-      title: "Home Assistant Service:"
-      data:
-       position: top-left
-       transparency: 50%
-       color: black
-       interrupt: 0
-       fontsize: medium
-       duration: 10
-```
-
-The message is sent to Android TV using [Notifications for Android TV](https://www.home-assistant.io/integrations/nfandroidtv/).  
-
-[![ADD Integrations](/img/button%20ADD%20INTEGRATION%20TO.svg)](https://my.home-assistant.io/redirect/config_flow_start?domain=nfandroidtv)
-
-![notifications](/img/notifications.png)
-
-### 📳 END  
-
-The automation monitors the power of the socket powering the washing machine. If power goes above 1W – it means the machine is running. If it drops below 1W for 5 seconds – it’s finished. A notification is then sent.
-
-## 🧾 FULL AUTOMATION
+### 🔌 Automation Trigger  
+When the washing machine is idle and turned off, the [Tuya Smart Plug Zigbee TS011F][plug] shows a value of "0 watt." Any reading above "1 watt" means the washing machine is on. This condition triggers the automation:  
 
 ```yaml
 alias: HASS PLUG NOTIFICATION
@@ -94,44 +51,131 @@ description: ""
 triggers:
   - platform: numeric_state
     entity_id:
-     - sensor.steckdose_002_wohnwand_power
+      - sensor.steckdose_002_wohnwand_power
     above: 1
     for:
-     hours: 0
-     minutes: 0
-     seconds: 10
+      hours: 0
+      minutes: 0
+      seconds: 10
+```
+
+### ⏲️ Condition  
+⚠️ This automation does **not** use a separate `conditions` block, as the condition is embedded in the actions.  
+
+### 📲 Action  
+Once power consumption drops below 1W for 5 seconds, a notification is sent:  
+
+```yaml
+actions:
+  - wait_for_trigger:
+      - platform: numeric_state
+        entity_id:
+          - sensor.steckdose_002_wohnwand_power
+        below: 1
+        for:
+          hours: 0
+          minutes: 0
+          seconds: 5
+        continue_on_timeout: false
+  - service: notify.mitv
+    metadata: {}
+    data:
+      message: Washing machine finished !!!
+      title: "Home Assistant Service:"
+      data:
+        position: top-left
+        transparency: 50%
+        color: black
+        interrupt: 0
+        fontsize: medium
+        duration: 10
+```
+
+The notification is sent to Android TV using [Notifications for Android TV](https://www.home-assistant.io/integrations/nfandroidtv/).  
+
+[![ADD Integrations](/img/button%20ADD%20INTEGRATION%20TO.svg)](https://my.home-assistant.io/redirect/config_flow_start?domain=nfandroidtv)  
+
+![notifications](/img/notifications.png)  
+
+### 📳 Automation Outcome  
+The automation monitors the plug's power usage. If it exceeds 1W, the washing machine is on. When it drops below 1W for 5 seconds, the cycle is complete, and a notification is sent.  
+
+### 🧾 Full Automation Code  
+
+```yaml
+alias: HASS PLUG NOTIFICATION
+description: ""
+triggers:
+  - platform: numeric_state
+    entity_id:
+      - sensor.steckdose_002_wohnwand_power
+    above: 1
+    for:
+      hours: 0
+      minutes: 0
+      seconds: 10
 conditions: []
 actions:
   - wait_for_trigger:
-   - platform: numeric_state
-  entity_id:
-    - sensor.steckdose_002_wohnwand_power
-  below: 1
-  for:
-    hours: 0
-    minutes: 0
-    seconds: 5
- continue_on_timeout: false
+      - platform: numeric_state
+        entity_id:
+          - sensor.steckdose_002_wohnwand_power
+        below: 1
+        for:
+          hours: 0
+          minutes: 0
+          seconds: 5
+        continue_on_timeout: false
   - service: notify.mitv
- metadata: {}
- data:
-   message: Washing machine finished !!!
-   title: "Home Assistant Service:"
-   data:
-  position: top-left
-  transparency: 50%
-  color: black
-  interrupt: 0
-  fontsize: medium
-  duration: 10
+    metadata: {}
+    data:
+      message: Washing machine finished !!!
+      title: "Home Assistant Service:"
+      data:
+        position: top-left
+        transparency: 50%
+        color: black
+        interrupt: 0
+        fontsize: medium
+        duration: 10
 mode: single
 ```
 
 ---
----
-> [!TIP]
-> If you like this project, check out [more of my repositories here](https://github.com/Bacard1?tab=repositories) .<br>
-> If you need help or have questions, feel free to contact me.
 
+## METHOD 2: Using a Binary Sensor  
+
+Creating a binary sensor simplifies the process and allows visualization of the device's state on your room map.  
+
+### Creating a Binary Sensor  
+
+1. Create a new template by clicking the button:  
+   [![Add Template](/img/button%20ADD%20INTEGRATION%20TO.svg)](https://my.home-assistant.io/redirect/config_flow_start?domain=template)  
+
+2. Select `binary_sensor`:  
+   ![img](/img/temp.png)  
+
+3. In the "State template*" field, enter:  
+
+```yaml
+{% if states('sensor.steckdose_002_wohnwand_power') | float == 0 %} 
+  off
+{% else %}
+  on
+{% endif %}
+```
+
+> `float == 0` sets a default value because without it, the sensor would return `null`, which is problematic for `INT` (integer) sensors. This is a simple example where a power reading above 0 means the device is on; otherwise, it's off.  
+
+### Sensor Configuration  
+Assign the sensor to the correct device, and you're done:  
+![img](/img/binary_sensor.png)  
+
+---
+
+## 💡 Tips & Additional Info  
+
+- If you liked this project, check out [HERE](https://github.com/Bacard1?tab=repositories) for more interesting repositories I've created.  
+- If you encounter issues or have questions, feel free to reach out.  
 
 [plug]: https://de.aliexpress.com/item/1005007060134011.html
