@@ -1,4 +1,5 @@
 ![BANNER](/img/banner.png)  
+<<<<<<< HEAD
 # 📣 SMART PLUG NOTIFICATIONS  
 
 [![Home Assistant](https://img.shields.io/badge/🏠_Home_Assistant-41BDF5?logo=homeassistant)](https://www.home-assistant.io/) [![Donate via PayPal](https://img.shields.io/badge/PayPal-Donate-blue?logo=paypal)](https://www.paypal.com/donate/?hosted_button_id=AAWFZVF2XCP5A)
@@ -8,6 +9,15 @@
 [![Deutch](https://img.shields.io/badge/DE_Deutsche-sprache-green?logo=translate&labelColor=gray&style=flat-square&link=https://example.com/bg
 )](DE.md)
 [![English](https://img.shields.io/badge/EN_English-language-green?logo=translate&labelColor=gray&style=flat-square&link=https://example.com/bg)](README.md)
+=======
+
+# 📣 SMART PLUG NOTIFICATIONS  
+
+
+[![PayPal Donation](https://img.shields.io/badge/PayPal-Donate-blue?logo=paypal)](https://www.paypal.com/donate/?hosted_button_id=AAWFZVF2XCP5A)  
+![Script](https://img.shields.io/badge/logo-yaml-green?logo=yaml)  
+[![BULGARIAN](https://img.shields.io/badge/BULGARIAN-language-green?logo=translate&labelColor=gray&style=flat-square&link=https://example.com/en)](BG.md)  
+>>>>>>> 943b4005188bd25aeb59f3fea52c7d2640fca2f5
 
 This Home Assistant automation notifies you when a device connected to a smart plug (e.g., washing machine, coffee maker, etc.) finishes its cycle. It monitors real-time power consumption to detect when the device stops operating and sends a visual notification to your TV or Android device. Ideal for energy savings and daily convenience.  
 
@@ -21,6 +31,8 @@ This Home Assistant automation notifies you when a device connected to a smart p
 ## 📦 CONTENTS  
 
 - [📣 SMART PLUG NOTIFICATIONS](#-smart-plug-notifications)
+- [](#)
+- [📣 SMART PLUG NOTIFICATIONS](#-smart-plug-notifications-1)
   - [📦 CONTENTS](#-contents)
   - [🚀 Tuya Smart Plug Zigbee TS011F](#-tuya-smart-plug-zigbee-ts011f)
   - [METHOD 1: Notification Automation](#method-1-notification-automation)
