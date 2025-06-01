@@ -1,10 +1,13 @@
+![BANNER](/img/banner.png)
 # 📣 ИЗВЕСТИЯ СЪС СМАРТ КОНТАКТ
 
-![BANNER](/img/banner.png)
-
-[![PayPal дарение](https://img.shields.io/badge/PayPal-Дари-синьо?logo=paypal)](https://www.paypal.com/donate/?hosted_button_id=AAWFZVF2XCP5A)  
-![Скрипт](https://img.shields.io/badge/logo-yaml-green?logo=yaml)  
-[![ENGLISH](https://img.shields.io/badge/ENGLISH-language-green?logo=translate&labelColor=gray&style=flat-square&link=https://example.com/bg)](README.md)  
+[![Home Assistant](https://img.shields.io/badge/🏠_Home_Assistant-41BDF5?logo=homeassistant)](https://www.home-assistant.io/) [![Donate via PayPal](https://img.shields.io/badge/PayPal-Donate-blue?logo=paypal)](https://www.paypal.com/donate/?hosted_button_id=AAWFZVF2XCP5A)
+![Script](https://img.shields.io/badge/logo-yaml-green?logo=yaml)
+[![Български](https://img.shields.io/badge/BG_Български-език-green?logo=translate&labelColor=gray&style=flat-square&link=https://example.com/bg
+)](BG.md)
+[![Deutch](https://img.shields.io/badge/DE_Deutsche-sprache-green?logo=translate&labelColor=gray&style=flat-square&link=https://example.com/bg
+)](DE.md)
+[![English](https://img.shields.io/badge/EN_English-language-green?logo=translate&labelColor=gray&style=flat-square&link=https://example.com/bg)](README.md)
 
 Тази автоматизация за Home Assistant ви уведомява, когато уред, включен в смарт контакт (например пералня, кафемашина и др.), приключи работа. Използва наблюдение на консумацията на енергия в реално време, за да засече кога уредът спира да работи, и изпраща визуално известие до вашия телевизор или Android устройство. Подходящо за пестене на енергия и удобство в ежедневието.
 
@@ -17,7 +20,7 @@
 
 ## 📦 СЪДЪРЖАНИЕ
 
-- [� ИЗВЕСТИЯ СЪС СМАРТ КОНТАКТ](#-известия-със-смарт-контакт)
+- [📣 ИЗВЕСТИЯ СЪС СМАРТ КОНТАКТ](#-известия-със-смарт-контакт)
   - [📦 СЪДЪРЖАНИЕ](#-съдържание)
   - [🚀 Tuya Smart Plug Zigbee TS011F](#-tuya-smart-plug-zigbee-ts011f)
   - [МЕТОД 1: Автоматизация за известия](#метод-1-автоматизация-за-известия)
